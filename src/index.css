@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #eee9e9;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -68,6 +68,14 @@ body,
   margin: 0;
   padding: 0;
   overflow: hidden;
+  /* Prevent pull-to-refresh and pinch zoom on the page */
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+/* Allow touch interactions on the canvas for OrbitControls */
+canvas {
+  touch-action: none;
 }
 
 .webgl {

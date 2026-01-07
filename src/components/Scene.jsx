@@ -1,19 +1,21 @@
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, useGLTF } from '@react-three/drei'
 
 export default function Scene() {
-  const boxRef = useRef()
-
+  const modelRef = useRef()
+  const { scene } = useGLTF('/models/model.gltf')
+  
   useFrame((state, delta) => {
-    boxRef.current.rotation.x += delta * 0.5
-    boxRef.current.rotation.y += delta * 0.5
+    if (modelRef.current) {
+      modelRef.current.rotation.y += delta * 0.5
+    }
   })
 
   return (
     <>
       {/* Lights */}
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.9} />
       <directionalLight
         position={[-2, 2, 1]}
         intensity={1}
@@ -22,15 +24,15 @@ export default function Scene() {
         shadow-mapSize-height={1024}
       />
 
-      {/* Green Box */}
-      <mesh ref={boxRef} castShadow receiveShadow>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial
-          color={0x00ff00}
-          roughness={0.7}
-          metalness={0.3}
-        />
-      </mesh>
+      {/* GLTF Model */}
+      <primitive 
+        object={scene} 
+        ref={modelRef}
+        scale={0.5}
+        position={[0, 0, 0]}
+        castShadow 
+        receiveShadow
+      />
 
       {/* Controls */}
       <OrbitControls
@@ -40,3 +42,6 @@ export default function Scene() {
     </>
   )
 }
+
+// Preload the model
+useGLTF.preload('/models/model.gltf')
