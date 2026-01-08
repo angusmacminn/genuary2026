@@ -6,6 +6,7 @@ import Genuary2 from './components/Genuary2'
 import Genuary3 from './components/Genuary3'
 import Genuary5 from './components/Genuary5'
 import Genuary6, { stopRecording } from './components/Genuary6'
+import Genuary7 from './components/Genuary7'
 
 function App() {
   const [isRecording, setIsRecording] = useState(false)
@@ -146,7 +147,7 @@ function App() {
         eventSource={document.getElementById('root')}
         eventPrefix="client"
       >
-        <Genuary6 isRecording={isRecording} />
+        <Genuary7 />
       </Canvas>
 
       <style>{`
