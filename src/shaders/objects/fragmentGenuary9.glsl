@@ -94,17 +94,17 @@ void main() {
     vec3 quantizedCoords = vec3(quantizedUVs * 30.0, uTime * 0.2);
     float quantizedNoiseSample = cellular(quantizedCoords);
 
-    float blended = clamp(cellularNoiseSample * 0.5 + quantizedNoiseSample * 0.5, 0.0, 1.0);
+    float blended = clamp(cellularNoiseSample * 0.5 + cellularNoiseSample * 0.5, 0.0, 1.0);
 
     float edgeMask = 1.0 - smoothstep(0.1, 0.4, noiseSample);
-    float result = mix(cellularNoiseSample, quantizedNoiseSample, edgeMask);
+    float result = mix(cellularNoiseSample, cellularNoiseSample, edgeMask);
 
     float distToCenter = length(vUv - vec2(cellularNoiseSample, cellularNoiseSample));
-    float pixelEdge = mix(distToCenter, quantizedNoiseSample, 0.9);
+    float pixelEdge = mix(distToCenter, cellularNoiseSample, 0.9);
     
-    vec3 noiseColor = mix(red, vec3(pixelEdge), noiseSample * 2.5 + 0.5);
+    vec3 noiseColor = mix(blue, vec3(noiseSample), quantizedNoiseSample * 2.5);
 
-    vec3 color = mix(noiseColor, blue, result);
+    vec3 color = mix(noiseColor, red, result);
     
     gl_FragColor = vec4(vec3(color), 1.0);
 }
