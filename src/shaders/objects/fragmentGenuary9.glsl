@@ -48,8 +48,8 @@ float cellular(vec3 coords) {
 
   float closest = 1.0;
   float secondClosest = 1.0;
-  for (float y = -2.0; y <= 2.0; y += 1.0) {
-    for (float x = -2.0; x <= 2.0; x += 1.0) {
+  for (float y = -1.0; y <= 1.0; y += 1.0) {
+    for (float x = -1.0; x <= 1.0; x += 1.0) {
       vec2 neighbourCellPosition = vec2(x, y);
       vec2 cellWorldPosition = gridBasePosition + neighbourCellPosition;
       vec2 cellOffset = vec2(
@@ -85,17 +85,14 @@ void main() {
     vec3 coords = vec3(vUv * 10.0, uTime * 0.2);
     vec2 uv = vUv;
 
-    float cellEdge = cellular(coords);
+    // Single cellular call - reuse for all coord-based samples
     float cellularNoiseSample = cellular(coords);
+    float noiseSample = cellularNoiseSample;
 
-
-    //pixel noise
-    vec2 quantizedUVs = floor(vUv * 1250.0) / 1250.0;
+    //pixel noise (reduced resolution for performance)
+    vec2 quantizedUVs = floor(vUv * 400.0) / 400.0;
     vec3 quantizedCoords = vec3(quantizedUVs * 30.0, uTime * 0.2);
     float quantizedNoiseSample = cellular(quantizedCoords);
-
-    // noise sample
-    float noiseSample = cellular(coords);
 
     float blended = clamp(cellularNoiseSample * 0.5 + quantizedNoiseSample * 0.5, 0.0, 1.0);
 
