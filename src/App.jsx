@@ -10,6 +10,8 @@ import Genuary7 from './components/Genuary7'
 import Genuary8 from './components/Genuary8'
 import Genuary9 from './components/Genuary9'
 import Genuary10 from './components/Genuary10'
+import Raymarching from './components/Raymarching'
+import Genuary11 from './components/Genuary11'
 
 function App() {
   const [isRecording, setIsRecording] = useState(false)
@@ -150,7 +152,7 @@ function App() {
         eventSource={document.getElementById('root')}
         eventPrefix="client"
       >
-        <Genuary10 />
+        <Genuary11/>
       </Canvas>
 
       <style>{`
