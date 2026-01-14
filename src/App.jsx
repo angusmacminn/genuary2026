@@ -14,6 +14,7 @@ import Raymarching from './components/Raymarching'
 import Genuary11 from './components/Genuary11'
 import Genuary12 from './components/Genuary12'
 import Genuary13 from './components/Genuary13'
+import Genuary14 from './components/Genuary14'
 
 function App() {
   const [isRecording, setIsRecording] = useState(false)
@@ -76,7 +77,7 @@ function App() {
       
 
       {/* Genuary13 is SVG/HTML - render outside Canvas */}
-      <Genuary13 />
+      <Genuary14 />
 
       <style>{`
         @keyframes pulse {
