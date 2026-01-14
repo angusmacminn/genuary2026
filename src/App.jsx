@@ -12,6 +12,8 @@ import Genuary9 from './components/Genuary9'
 import Genuary10 from './components/Genuary10'
 import Raymarching from './components/Raymarching'
 import Genuary11 from './components/Genuary11'
+import Genuary12 from './components/Genuary12'
+import Genuary13 from './components/Genuary13'
 
 function App() {
   const [isRecording, setIsRecording] = useState(false)
@@ -69,91 +71,12 @@ function App() {
 
   return (
     <>
-      {/* Recording Controls - hidden on mobile due to limited support */}
-      {!isMobile && (
-        <div style={{
-          position: 'fixed',
-          top: 20,
-          left: 20,
-          zIndex: 1000,
-          display: 'flex',
-          gap: '10px',
-          alignItems: 'center',
-        }}>
-          {!isRecording ? (
-            <button
-              onClick={handleStartRecording}
-              style={{
-                padding: '12px 24px',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                backgroundColor: '#ff4444',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-              }}
-            >
-              <span style={{
-                width: '12px',
-                height: '12px',
-                backgroundColor: 'white',
-                borderRadius: '50%',
-              }}></span>
-              Start Recording
-            </button>
-          ) : (
-            <button
-              onClick={handleStopRecording}
-              style={{
-                padding: '12px 24px',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                backgroundColor: '#333',
-                color: 'white',
-                border: '2px solid #ff4444',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                animation: 'pulse 1s infinite',
-              }}
-            >
-              <span style={{
-                width: '12px',
-                height: '12px',
-                backgroundColor: '#ff4444',
-                borderRadius: '2px',
-              }}></span>
-              Stop & Save
-            </button>
-          )}
-          {isRecording && (
-            <span style={{
-              color: '#ff4444',
-              fontWeight: 'bold',
-              fontSize: '14px',
-            }}>
-              ● REC
-            </span>
-          )}
-        </div>
-      )}
+      
 
       
 
-      <Canvas
-        gl={{ preserveDrawingBuffer: true }}
-        // Enable touch events
-        eventSource={document.getElementById('root')}
-        eventPrefix="client"
-      >
-        <Genuary11/>
-      </Canvas>
+      {/* Genuary13 is SVG/HTML - render outside Canvas */}
+      <Genuary13 />
 
       <style>{`
         @keyframes pulse {
