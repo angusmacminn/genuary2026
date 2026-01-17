@@ -15,80 +15,20 @@ import Genuary11 from './components/Genuary11'
 import Genuary12 from './components/Genuary12'
 import Genuary13 from './components/Genuary13'
 import Genuary14 from './components/Genuary14'
+import Genuary15 from './components/Genuary15'
+import Genuary16 from './components/Genuary16'
 
 function App() {
-  const [isRecording, setIsRecording] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const [showHint, setShowHint] = useState(true)
 
-  // Detect mobile device
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.matchMedia('(max-width: 768px)').matches || 
-                  'ontouchstart' in window)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
 
-  // Hide hint after 4 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => setShowHint(false), 4000)
-    return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    // Double-click/double-tap for fullscreen (works on both desktop and mobile)
-    let lastTap = 0
-    const handleDoubleTap = (e) => {
-      const now = Date.now()
-      if (now - lastTap < 300) {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen?.()
-        } else {
-          document.exitFullscreen?.()
-        }
-      }
-      lastTap = now
-    }
-
-    window.addEventListener('touchend', handleDoubleTap)
-    window.addEventListener('dblclick', handleDoubleTap)
-    return () => {
-      window.removeEventListener('touchend', handleDoubleTap)
-      window.removeEventListener('dblclick', handleDoubleTap)
-    }
-  }, [])
-
-  const handleStartRecording = () => {
-    setIsRecording(true)
-  }
-
-  const handleStopRecording = () => {
-    stopRecording()
-    setIsRecording(false)
-  }
 
   return (
     <>
+      <Canvas camera={{ position: [0, 0, 15], fov: 70 }}>
+        <Genuary16 />
+      </Canvas>
       
 
-      
-
-      {/* Genuary13 is SVG/HTML - render outside Canvas */}
-      <Genuary14 />
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.7; }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-          to { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-      `}</style>
     </>
   )
 }
