@@ -19,14 +19,17 @@ import Genuary15 from './components/Genuary15'
 import Genuary16 from './components/Genuary16'
 import Genuary17 from './components/Genuary17'
 import Genuary19 from './components/Genuary19'
+import Genuary20 from './components/Genuary20'
 function App() {
 
 
 
   return (
     <>
+    <Genuary20 />
+      
       <Canvas camera={{ position: [0, 0, 1], fov: 75 }}>
-        <Genuary19 />
+        
       </Canvas>
       
 
